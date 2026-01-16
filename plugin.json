@@ -1,8 +1,8 @@
 {
     "version"           : "5.0.78",
     "name"              : "Ceres",
-    "marketplaceName"   : {"de": "plentyShop LTS","en": "plentyShop LTS"},
-    "description"       : "This is the official plentyShop LTS plugin developed by PlentyONE. plentyShop LTS is the default template plugin for PlentyONE online stores.",
+    "marketplaceName"   : {"de": "plentyShop LTS (Custom - Preis auf Anfrage)","en": "plentyShop LTS (Custom - Price on Request)"},
+    "description"       : "Custom version of plentyShop LTS with 'Price on Request' feature. Based on official plentyShop LTS plugin developed by PlentyONE.",
     "author"            : "PlentyONE GmbH",
     "license"           : "AGPL-3.0",
     "pluginIcon"        : "icon_plugin_xs.png",
