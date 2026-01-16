@@ -168,6 +168,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -581,7 +600,33 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              !_vm.allVariationsSelected || !_vm.isSalable
+              !_vm.hasPrice
+                ? _c(
+                    "a",
+                    {
+                      staticClass:
+                        "btn btn-block btn-primary btn-appearance btn-lg",
+                      class: _vm.buttonClasses,
+                      style: _vm.paddingInlineStyles,
+                      attrs: { href: "/kontakt" }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-envelope mr-2",
+                        attrs: { "aria-hidden": "true" }
+                      }),
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(
+                            _vm.$translate(
+                              "Ceres::Template.itemPriceOnRequestButton"
+                            )
+                          ) +
+                          "\n            "
+                      )
+                    ]
+                  )
+                : !_vm.allVariationsSelected || !_vm.isSalable
                 ? _c(
                     "button",
                     {
@@ -619,7 +664,7 @@ var render = function() {
                       staticClass: "btn btn-block btn-primary btn-appearance",
                       class: _vm.buttonClasses,
                       style: _vm.paddingInlineStyles,
-                      attrs: { disabled: _vm.isLoading || !_vm.hasPrice },
+                      attrs: { disabled: _vm.isLoading },
                       on: {
                         click: function($event) {
                           return _vm.addToBasket()
@@ -693,7 +738,31 @@ var render = function() {
                 attrs: { role: "group", "aria-label": "Thumb Control" }
               },
               [
-                _vm.canBeAddedToBasket
+                !_vm.hasPrice
+                  ? _c(
+                      "a",
+                      {
+                        staticClass:
+                          "btn btn-primary btn-appearance mobile-width-button",
+                        attrs: { href: "/kontakt" }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fa fa-envelope fa-lg mobile-icon-right",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(
+                              _vm.$translate(
+                                "Ceres::Template.itemPriceOnRequestButton"
+                              )
+                            ) +
+                            "\n            "
+                        )
+                      ]
+                    )
+                  : _vm.canBeAddedToBasket
                   ? _c(
                       "button",
                       {

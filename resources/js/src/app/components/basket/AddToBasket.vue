@@ -25,8 +25,20 @@
                     </quantity-input>
                 </div>
 
+                <!-- Price on Request Button -->
+                <a
+                        v-if="!hasPrice"
+                        href="/kontakt"
+                        class="btn btn-block btn-primary btn-appearance btn-lg"
+                        :class="buttonClasses"
+                        :style="paddingInlineStyles">
+                    <i class="fa fa-envelope mr-2" aria-hidden="true"></i>
+                    {{ $translate("Ceres::Template.itemPriceOnRequestButton") }}
+                </a>
+
+                <!-- Normal Add to Basket Buttons -->
                 <button
-                        v-if="!allVariationsSelected || !isSalable"
+                        v-else-if="!allVariationsSelected || !isSalable"
                         class="btn btn-block btn-primary btn-appearance disabled"
                         v-tooltip
                         data-toggle="tooltip"
@@ -39,7 +51,7 @@
                 </button>
                 <button
                         v-else-if="!buttonLockState"
-                        :disabled="isLoading || !hasPrice"
+                        :disabled="isLoading"
                         class="btn btn-block btn-primary btn-appearance"
                         @click="addToBasket()"
                         :class="buttonClasses"
@@ -63,7 +75,14 @@
 
         <div class="d-inline" v-if="!showQuantity && !useLargeScale" :class="{'d-lg-none': !isWishList }">
             <div class="btn-group" role="group" aria-label="Thumb Control">
-                <button type="button" :class="{'no-pointer-events': isLoading}" v-if="canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
+                <!-- Price on Request Button (Mobile) -->
+                <a v-if="!hasPrice" href="/kontakt" class="btn btn-primary btn-appearance mobile-width-button">
+                    <i class="fa fa-envelope fa-lg mobile-icon-right" aria-hidden="true"></i>
+                    {{ $translate("Ceres::Template.itemPriceOnRequestButton") }}
+                </a>
+
+                <!-- Normal Buttons (Mobile) -->
+                <button type="button" :class="{'no-pointer-events': isLoading}" v-else-if="canBeAddedToBasket" class="btn btn-primary btn-appearance mobile-width-button" @click="addToBasket()">
                     <icon icon="shopping-cart" class="fa-lg mobile-icon-right" :loading="isLoading"></icon>
                     {{ $translate("Ceres::Template.singleItemAddToBasket") }}
                 </button>

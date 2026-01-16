@@ -331,6 +331,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -421,6 +429,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var hasRrpPrice = !!this.item.prices.rrp && this.item.prices.rrp.unitPrice.value > this.item.prices.default.unitPrice.value;
       var hasBeforePrice = !!this.item.prices.specialOffer && !!this.item.prices.default && this.item.prices.default.unitPrice.value > this.item.prices.specialOffer.unitPrice.value;
       return hasRrpPrice || hasBeforePrice;
+    },
+    isPriceOnRequest: function isPriceOnRequest() {
+      // Check if price is 0.00 (indicating "Price on Request")
+      return this.item.prices.default && this.item.prices.default.price.value === 0;
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapState"])({
     showNetPrices: function showNetPrices(state) {
@@ -783,134 +795,156 @@ var render = function() {
                   [
                     _vm._t("before-prices"),
                     _vm._v(" "),
-                    _c("div", { staticClass: "prices" }, [
-                      _vm.item.prices.rrp &&
-                      _vm.item.prices.rrp.price.value > 0 &&
-                      _vm.item.prices.rrp.price.value >
-                        _vm.item.prices.default.price.value
-                        ? _c("div", { staticClass: "price-view-port" }, [
-                            _vm.item.prices.specialOffer
-                              ? _c("del", { staticClass: "crossprice" }, [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.default.unitPrice
-                                            .formatted,
-                                          true
-                                        )
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ])
-                              : _c("del", { staticClass: "crossprice" }, [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(
-                                        _vm._f("itemCrossPrice")(
-                                          _vm.item.prices.rrp.unitPrice
-                                            .formatted
-                                        )
-                                      ) +
-                                      "\n                            "
-                                  )
-                                ])
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "price" },
-                        [
-                          _vm.item.item.itemType === "set"
-                            ? [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemSetPrice",
-                                        { price: _vm.itemSetPrice }
+                    _vm.isPriceOnRequest
+                      ? _c("div", { staticClass: "prices" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "price text-primary font-weight-bold"
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(
+                                    _vm.$translate(
+                                      "Ceres::Template.itemPriceOnRequest"
+                                    )
+                                  ) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ])
+                      : _c("div", { staticClass: "prices" }, [
+                          _vm.item.prices.rrp &&
+                          _vm.item.prices.rrp.price.value > 0 &&
+                          _vm.item.prices.rrp.price.value >
+                            _vm.item.prices.default.price.value
+                            ? _c("div", { staticClass: "price-view-port" }, [
+                                _vm.item.prices.specialOffer
+                                  ? _c("del", { staticClass: "crossprice" }, [
+                                      _vm._v(
+                                        "\n                                " +
+                                          _vm._s(
+                                            _vm._f("itemCrossPrice")(
+                                              _vm.item.prices.default.unitPrice
+                                                .formatted,
+                                              true
+                                            )
+                                          ) +
+                                          "\n                            "
                                       )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
+                                    ])
+                                  : _c("del", { staticClass: "crossprice" }, [
+                                      _vm._v(
+                                        "\n                                " +
+                                          _vm._s(
+                                            _vm._f("itemCrossPrice")(
+                                              _vm.item.prices.rrp.unitPrice
+                                                .formatted
+                                            )
+                                          ) +
+                                          "\n                            "
                                       )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                            : _vm.itemGraduatedPriceisCheapestSorting
-                            ? [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFromPrice",
-                                        { price: _vm.itemPriceGraduated }
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                            : _vm.itemGraduatedPricesalableVariationCount
-                            ? [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFromPrice",
-                                        { price: _vm.itemPriceGraduated }
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                            : [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm._f("specialOffer")(
-                                        _vm.item.prices.default.unitPrice
-                                          .formatted,
-                                        _vm.item.prices,
-                                        "unitPrice",
-                                        "formatted"
-                                      )
-                                    ) +
-                                    " " +
-                                    _vm._s(
-                                      _vm.$translate(
-                                        "Ceres::Template.itemFootnote"
-                                      )
-                                    ) +
-                                    "\n                            "
-                                )
-                              ]
-                        ],
-                        2
-                      )
-                    ])
+                                    ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "price" },
+                            [
+                              _vm.item.item.itemType === "set"
+                                ? [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(
+                                          _vm.$translate(
+                                            "Ceres::Template.itemSetPrice",
+                                            { price: _vm.itemSetPrice }
+                                          )
+                                        ) +
+                                        " " +
+                                        _vm._s(
+                                          _vm.$translate(
+                                            "Ceres::Template.itemFootnote"
+                                          )
+                                        ) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                : _vm.itemGraduatedPriceisCheapestSorting
+                                ? [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(
+                                          _vm.$translate(
+                                            "Ceres::Template.itemFromPrice",
+                                            { price: _vm.itemPriceGraduated }
+                                          )
+                                        ) +
+                                        " " +
+                                        _vm._s(
+                                          _vm.$translate(
+                                            "Ceres::Template.itemFootnote"
+                                          )
+                                        ) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                : _vm.itemGraduatedPricesalableVariationCount
+                                ? [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(
+                                          _vm.$translate(
+                                            "Ceres::Template.itemFromPrice",
+                                            { price: _vm.itemPriceGraduated }
+                                          )
+                                        ) +
+                                        " " +
+                                        _vm._s(
+                                          _vm.$translate(
+                                            "Ceres::Template.itemFootnote"
+                                          )
+                                        ) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                : [
+                                    _vm._v(
+                                      "\n                                " +
+                                        _vm._s(
+                                          _vm._f("specialOffer")(
+                                            _vm.item.prices.default.unitPrice
+                                              .formatted,
+                                            _vm.item.prices,
+                                            "unitPrice",
+                                            "formatted"
+                                          )
+                                        ) +
+                                        " " +
+                                        _vm._s(
+                                          _vm.$translate(
+                                            "Ceres::Template.itemFootnote"
+                                          )
+                                        ) +
+                                        "\n                            "
+                                    )
+                                  ]
+                            ],
+                            2
+                          )
+                        ])
                   ],
                   2
                 ),
                 _vm._v(" "),
                 _vm._t("after-prices"),
                 _vm._v(" "),
-                _vm.item.prices.default.lowestPrice.value && _vm.hasCrossPrice
+                !_vm.isPriceOnRequest &&
+                _vm.item.prices.default.lowestPrice.value &&
+                _vm.hasCrossPrice
                   ? _c("div", { staticClass: "category-lowest-price small" }, [
                       _c("span", {
                         domProps: {
@@ -925,6 +959,7 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
+                !_vm.isPriceOnRequest &&
                 !(
                   _vm.item.unit.unitOfMeasurement === "C62" &&
                   _vm.item.unit.content === 1

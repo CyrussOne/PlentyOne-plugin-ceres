@@ -59,7 +59,15 @@
                     <div class="thumb-meta mt-2">
                         <slot name="before-prices"></slot>
 
-                        <div class="prices">
+                        <!-- Preis auf Anfrage (Price on Request) -->
+                        <div v-if="isPriceOnRequest" class="prices">
+                            <div class="price text-primary font-weight-bold">
+                                {{ $translate("Ceres::Template.itemPriceOnRequest") }}
+                            </div>
+                        </div>
+
+                        <!-- Normal Price Display -->
+                        <div v-else class="prices">
                             <div v-if="item.prices.rrp && item.prices.rrp.price.value > 0 && item.prices.rrp.price.value > item.prices.default.price.value" class="price-view-port">
                                 <del class="crossprice" v-if="item.prices.specialOffer">
                                     {{ item.prices.default.unitPrice.formatted | itemCrossPrice(true) }}
@@ -88,11 +96,11 @@
 
                     <slot name="after-prices"></slot>
 
-                    <div class="category-lowest-price small" v-if="item.prices.default.lowestPrice.value && hasCrossPrice">
+                    <div class="category-lowest-price small" v-if="!isPriceOnRequest && item.prices.default.lowestPrice.value && hasCrossPrice">
                         <span v-html="$translate('Ceres::Template.itemLowestPrice', {'price': item.prices.default.lowestPrice.formatted})"></span>
                     </div>
 
-                    <div class="category-unit-price small" v-if="!(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
+                    <div class="category-unit-price small" v-if="!isPriceOnRequest && !(item.unit.unitOfMeasurement === 'C62' && item.unit.content === 1)">
                         <span>{{ item.unit.content }}</span>
                         <span>&nbsp;{{ item.unit.names.name }}</span>
                         <span v-if="item.variation.mayShowUnitPrice">&nbsp;| {{ basePrice }}</span>
@@ -263,6 +271,12 @@ export default {
                 this.item.prices.default.unitPrice.value > this.item.prices.specialOffer.unitPrice.value;
 
             return hasRrpPrice || hasBeforePrice;
+        },
+
+        isPriceOnRequest() {
+            // Check if price is 0.00 (indicating "Price on Request")
+            return this.item.prices.default &&
+                   this.item.prices.default.price.value === 0;
         },
 
         ...mapState({
