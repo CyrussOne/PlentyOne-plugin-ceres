@@ -275,8 +275,12 @@ export default {
 
         isPriceOnRequest() {
             // Check if price is 0.00 (indicating "Price on Request")
-            return this.item.prices.default &&
-                   this.item.prices.default.price.value === 0;
+            // More robust check that handles 0, 0.0, "0", etc.
+            if (!this.item.prices.default || !this.item.prices.default.price) {
+                return false;
+            }
+            const priceValue = this.item.prices.default.price.value;
+            return priceValue !== null && priceValue !== undefined && parseFloat(priceValue) === 0;
         },
 
         ...mapState({

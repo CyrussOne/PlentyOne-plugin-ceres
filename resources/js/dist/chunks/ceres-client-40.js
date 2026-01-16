@@ -114,7 +114,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     isPriceOnRequest: function isPriceOnRequest() {
       // Check if price is 0.00 (indicating "Price on Request")
-      return this.currentVariation.prices.default && this.currentVariation.prices.default.price.value === 0;
+      // More robust check that handles 0, 0.0, "0", etc.
+      if (!this.currentVariation.prices.default || !this.currentVariation.prices.default.price) {
+        return false;
+      }
+
+      var priceValue = this.currentVariation.prices.default.price.value;
+      return priceValue !== null && priceValue !== undefined && parseFloat(priceValue) === 0;
     },
     hasCrossPrice: function hasCrossPrice() {
       var hasRrpPrice = !!this.currentVariation.prices.rrp && this.currentVariation.prices.rrp.unitPrice.value > this.currentVariation.prices.default.unitPrice.value;
