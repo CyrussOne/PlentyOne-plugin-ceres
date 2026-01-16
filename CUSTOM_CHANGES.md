@@ -181,6 +181,130 @@ Implementiert "Preis auf Anfrage" Feature für Artikel mit Verkaufspreis ID 8 (P
 
 ---
 
+## 🔍 Troubleshooting: "Plugin CfourCustomCssJs requires 'Ceres'"
+
+### Problem:
+Trotz korrekter Konfiguration (name: "Ceres", version: "5.0.79") erscheint die Fehlermeldung weiterhin bei der Plugin-Bereitstellung.
+
+### Schritt-für-Schritt-Lösung:
+
+#### 1. Plugin-Set vollständig prüfen
+Gehen Sie zu **Plugins » Plugin-Set-Übersicht** und prüfen Sie:
+- [ ] Ist **plentyShop LTS** (Original) wirklich vollständig gelöscht (nicht nur deaktiviert)?
+- [ ] Ist **YEEQ Ceres - Preis auf Anfrage** im Plugin-Set vorhanden?
+- [ ] Welche Version wird bei **YEEQ Ceres** angezeigt?
+
+**So löschen Sie das Original-Plugin vollständig:**
+1. Plugins » Plugin-Set-Übersicht öffnen
+2. Ihr aktives Plugin-Set auswählen
+3. Bei "plentyShop LTS" auf das **Mülleimer-Symbol** klicken (NICHT Deaktivieren!)
+4. Löschung bestätigen
+
+#### 2. Plugin komplett neu installieren
+
+**A) Altes Plugin entfernen:**
+1. Plugins » Plugin-Set-Übersicht
+2. "YEEQ Ceres - Preis auf Anfrage" über das Mülleimer-Symbol löschen
+3. Speichern und warten bis Änderung übernommen wurde
+
+**B) Neues Plugin installieren:**
+1. Plugins » Git
+2. Bei Ihrem Repository den **"Installieren" Button** klicken
+3. **WICHTIG:** Branch auswählen: `claude/review-github-repo-eQDlp`
+4. Plugin-Set auswählen (Ihr aktives Set)
+5. Installation abschließen
+
+**C) Plugin aktivieren:**
+1. Plugins » Plugin-Set-Übersicht
+2. Ihr Plugin-Set öffnen
+3. "YEEQ Ceres - Preis auf Anfrage" aktivieren (Häkchen setzen)
+4. Position prüfen: Template-Plugins sollten vor Theme-Plugins stehen
+5. Speichern
+
+#### 3. Plugin-Reihenfolge prüfen
+Die Reihenfolge im Plugin-Set ist wichtig:
+```
+1. IO (Basis-Plugin)
+2. YEEQ Ceres - Preis auf Anfrage (Template)
+3. CfourCustomCssJs (Theme/Erweiterung)
+4. Weitere Plugins...
+```
+
+**So ändern Sie die Reihenfolge:**
+1. Plugins » Plugin-Set-Übersicht » Ihr Set
+2. Plugins per Drag & Drop verschieben
+3. Speichern
+
+#### 4. Plugin-Bereitstellung mit detaillierter Prüfung
+
+**Vor der Bereitstellung:**
+1. Plugins » Plugin-Set-Übersicht
+2. Prüfen Sie die angezeigten Plugin-Namen:
+   - Es sollte **KEIN** "plentyShop LTS" mehr vorhanden sein
+   - "YEEQ Ceres - Preis auf Anfrage" sollte Version **5.0.79** zeigen
+   - "CfourCustomCssJs" sollte aktiv sein
+
+**Bereitstellung starten:**
+1. Plugins » Plugin-Set-Übersicht
+2. Bei Ihrem Plugin-Set auf **"Bereitstellen"** klicken
+3. **Deployment-Log genau beobachten**
+
+**Mögliche Fehlerursachen im Log:**
+- "Plugin nicht gefunden" → Git-Installation prüfen
+- "Version nicht gefunden" → Branch-Auswahl prüfen
+- "Abhängigkeit fehlt" → IO-Plugin prüfen
+
+#### 5. Cache leeren (falls Problem weiterhin besteht)
+
+**A) Browser-Cache:**
+1. Browser-Cache vollständig leeren
+2. Inkognito-/Privater Modus für Test verwenden
+
+**B) PlentyOne-Cache:**
+1. System » Systemeinstellungen » Dienste » Cache
+2. "Backend-Cache leeren" ausführen
+3. "Template-Cache leeren" ausführen
+
+#### 6. Alternative: Plugin-Set neu erstellen
+
+Falls alles andere nicht hilft:
+1. Neues Plugin-Set erstellen: Plugins » Plugin-Set-Übersicht » **Neues Set erstellen**
+2. Name: z.B. "YEEQ Shop Custom"
+3. Basis-Plugins installieren (IO, etc.)
+4. YEEQ Ceres aus Git installieren (Branch: `claude/review-github-repo-eQDlp`)
+5. CfourCustomCssJs und andere Plugins hinzufügen
+6. Plugin-Set dem Mandanten zuweisen
+7. Bereitstellen
+
+#### 7. Versions-Informationen verifizieren
+
+Prüfen Sie im Git-Repository (GitHub):
+- Branch: `claude/review-github-repo-eQDlp`
+- Letzter Commit: `781ebf6` (oder neuer)
+- plugin.json Zeile 2: `"version": "5.0.79"`
+- plugin.json Zeile 3: `"name": "Ceres"`
+
+**Falls die Version nicht stimmt:**
+1. Plugins » Git » Repository neu laden (Refresh)
+2. Plugin erneut installieren
+
+#### 8. Support-Informationen sammeln
+
+Falls der Fehler weiterhin auftritt, sammeln Sie diese Informationen:
+- [ ] Screenshot der Plugin-Set-Übersicht (alle Plugins sichtbar)
+- [ ] Screenshot des Deployment-Logs (vollständige Fehlermeldung)
+- [ ] Welche Version wird bei "YEEQ Ceres" in der Plugin-Übersicht angezeigt?
+- [ ] Ist das Original "plentyShop LTS" wirklich weg (Screenshot)?
+- [ ] Branch-Auswahl beim Git-Plugin (Screenshot)
+
+### Häufigste Ursachen:
+1. **Original-Plugin nicht gelöscht** - Nur deaktiviert statt gelöscht
+2. **Falscher Branch** - "stable" statt "claude/review-github-repo-eQDlp"
+3. **Cache-Problem** - PlentyOne nutzt alte Plugin-Informationen
+4. **Falsche Reihenfolge** - Template-Plugin steht nach Theme-Plugin
+
+---
+
 ## ⚠️ Rollback-Anleitung
 
 ### Falls etwas schief geht:
