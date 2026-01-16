@@ -161,8 +161,23 @@ Dies erstellt die kompilierten Dateien in `/resources/js/dist/`
 **Zusammenfassung:**
 Implementiert "Preis auf Anfrage" Feature für Artikel mit Verkaufspreis ID 8 (Preis = 0,00 €). Zeigt "Preis auf Anfrage" Text und "Jetzt anfragen" Button, der zum Kontaktformular (/kontakt) weiterleitet. Funktioniert auf Einzelartikelseite, Kategorieansicht, Desktop und Mobile.
 
-### Commit 2: Build erstellt
-- PENDING (wird nach npm run build durchgeführt)
+### Commit 2: Plugin-Name eindeutig gemacht
+**Datum:** 2026-01-16
+**Geänderte Dateien:** 1 Datei
+
+**plugin.json Änderungen:**
+- **name:** "Ceres" → "YEEQCeresCustom" (eindeutiger interner Name)
+- **marketplaceName:** "YEEQ Ceres - Preis auf Anfrage" (DE) / "YEEQ Ceres - Price on Request" (EN)
+- **description:** Erweitert mit spezifischer Beschreibung
+- **author:** "CyrussOne / YEEQ Shop"
+- **shortDescription:** Angepasst für YEEQ Custom Template
+- **email:** info@yeeq.de
+- **keywords:** Erweitert um "YEEQ", "custom", "price on request", "preis auf anfrage"
+
+**Zweck:** Eindeutige Identifizierung des Plugins in PlentyOne, keine Verwechslung mit Original plentyShop LTS
+
+### Commit 3: Build erstellt
+- PENDING (wird bei Bedarf durchgeführt)
 
 ---
 
