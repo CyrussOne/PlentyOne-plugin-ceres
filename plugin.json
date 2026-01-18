@@ -1,6 +1,6 @@
 {
     "version"           : "5.0.81",
-    "name"              : "YEEQShopCeres",
+    "name"              : "Ceres",
     "marketplaceName"   : {"de": "YEEQ Ceres - Preis auf Anfrage (Shahram)","en": "YEEQ Ceres - Price on Request (Shahram)"},
     "description"       : "Custom Ceres template for YEEQ Shop with 'Price on Request' feature. Based on plentyShop LTS 5.0.78. Shows 'Preis auf Anfrage' for items with price 0.00€ and redirects to contact form. Developed by Shahram.",
     "author"            : "Shahram (YEEQ Shop)",
